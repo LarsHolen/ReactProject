@@ -1,8 +1,9 @@
 import React from 'react'
+import HowContainer from '../components/HowContainer'
 
 export const HowPage = () => {
   return (
-    <div>How we do it</div>
+    <HowContainer />
   )
 }
 export default HowPage;

@@ -272,7 +272,6 @@ h1 {
   height: 190px;
   border-radius: 50%;
   background-color: var(--primary-background-color);
-  
 }
 .itemTitle {
   font-weight: 600;
@@ -291,12 +290,45 @@ h1 {
 
 }
 
+.how{
+  margin-bottom: 2rem;
+}
+.howTitle {
+  font-weight: 600;
+  font-size: var(--font-size-xsm);
+}
+.itemImage {
+  margin:auto;
+  width:fit-content;
+  border-radius: 12px;
+  background-color: var(--primary-background-color);
+  margin-bottom: 2rem;
+  
+}
+
 .themeSwitch {
   height: 100%;
   display: flex;
   padding: 0.25rem;
   float: right;
  
+}
+
+.video-responsive {
+  position: absolute;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  margin: 1rem;
+  transform: translate(-50%, 0%);
+  width: fit-content;
+  height:500px;
+  position: absolute;
+  text-align: center;
 }
 
 
