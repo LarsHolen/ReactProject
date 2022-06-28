@@ -1,0 +1,83 @@
+
+/*Title*/
+.item div:nth-of-type(1) {
+    position: absolute;
+    padding: 1px;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    color: var(--text-color);
+  }
+  
+  .item:hover {
+    box-shadow: 0px 30px 18px -8px var(--primary-background-color);
+    transform: scale(1.4, 1.4);
+  }
+  
+  
+  .item div:nth-of-type(2) img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  /*hele Skriftfelt i nedre del av item*/
+  .item div:nth-of-type(3) {
+    z-index: 2;
+    background-color: var(--transparent-dark-color);
+    padding: 0;
+    height: fit-content;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  
+  /*Datoskrift i item*/
+  .item div:nth-of-type(3) span {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+    background-color: transparent;
+    color: var(--text-color);
+  }
+  
+  .item div:nth-of-type(3) h3 {
+    margin-top: 5px;
+    font-size: 0.75rem;
+    font-family: "Roboto Slab", serif;
+    color: var(--text-color);
+  }
+  
+  .item:hover div:nth-of-type(2) {
+    opacity: 1;
+    font-size: 0.5rem;
+    color: var(--hover-dark-color);
+    
+  }
+  
+  .item:hover div:nth-of-type(3) {
+    background-color: transparent;
+  }
+  
+  /*Date hoover*/
+  .item:hover div:nth-of-type(3) span {
+    color: var(--hover-dark-color);
+    font-size: 0.5rem;
+    padding: 0px 0px 0px 0px;
+  }
+  
+  /* Hoover text*/
+  .item:hover div:nth-of-type(3) h3 {
+    color: var(--text-color);
+    padding: 0px 0px 0px 0px;
+  ;}
+  
+  /* Title*/
+  .item:hover div:nth-of-type(1) {
+    opacity: 0;
+    color: var(--hover-dark-color)
+  }
+  

@@ -18,3 +18,6 @@ const News = ({news}) => {
 }
 
 export default News;
+
+
+   

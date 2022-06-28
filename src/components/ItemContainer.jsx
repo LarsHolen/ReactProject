@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import '../App.css';
+import '../css/App.css';
 import Item from './Item';
 
 
@@ -22,7 +22,7 @@ const ItemContainer = () => {
 
     return (
         <div className="app">
-            <h1 className="itemsHeader" ></h1>
+            <h1 className="itemsHeader" >Products</h1>
 
             {items?.length > 0
             ?(
