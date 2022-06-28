@@ -1,24 +1,30 @@
 import React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import ReactSwitch from 'react-switch';
 
-import '../css/navbar.css';
+import '../css/App.css';
 
 
 
 
-const NavBar = () => {
-    
+const NavBar = (props) => {
+    let theme = props.theme;
+    let toggleTheme = props.toggleTheme;
     return (
+        <div>
         <nav className="navBar">
-            <Link to="/" className="navBarHeader" >JTF jewellry</Link>
-
-            <ul>
+            <ul className="navBarButtons">
                 <CustomLink to="/">News</CustomLink>
                 <CustomLink to="/how">How we do it</CustomLink>
                 <CustomLink to="/products">Products</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
+                <div className="themeSwitch">
+                <ReactSwitch className="switchNav" offHandleColor="#aaaaaa" color="#afaa00" onColor="#ddd" onHandleColor="#444" onChange={toggleTheme} checked={ theme === "dark"} />
+                </div>
             </ul>
         </nav>
+        
+        </div>
     );
 }
 

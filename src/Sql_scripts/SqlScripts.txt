@@ -1,0 +1,62 @@
+Making the news table:
+
+CREATE TABLE `jtf_news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `comment` varchar(500) DEFAULT NULL,
+  `imageURL` varchar(50) DEFAULT NULL,
+  `videoURL` varchar(50) DEFAULT NULL
+)
+
+
+
+<?php
+
+ header('Content-type: text/html; charset=ISO-8859-15');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Authorization, Origin, numberofrows, startindex');
+header('Access-Control-Allow-Methods: POST, PUT, GET');
+ 
+require "../config.php";
+require "../common.php";
+
+
+
+
+
+$conn = mysqli_connect($host,$username,$password,$dbname);
+$connection = new PDO($dsn, $username, $password, $options);
+
+if (mysqli_connect_errno())
+{
+    die("Connection Error: " . mysqli_connect_error());
+} 
+
+
+
+// Finds how many entries
+$lengthSQL = "SELECT COUNT(*) AS total FROM jtf_news";
+
+$lengthQuery = mysqli_query($conn, $lengthSQL);
+$lengthBlog = mysqli_fetch_assoc($lengthQuery);
+
+
+$startAt = $_POST['startIndex'];
+$numberOfRows = $_POST['numberOfRows'];
+
+
+//$sql = "SELECT * FROM jtf_news ORDER BY PublishDate DESC LIMIT $startIndex, $numberOfRows ";
+$sql = "SELECT * FROM jtf_news";
+try{
+    $statement = $connection->prepare($sql);
+    //$statement->bindParam(':startIndex', $startAt, PDO::PARAM_STR);
+    $statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+
+
+  } catch(PDOException $error) {
+    
+	  echo json_encode($error);
+  }
+?>
