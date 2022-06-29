@@ -12,17 +12,21 @@ const NavBar = (props) => {
     let toggleTheme = props.toggleTheme;
     return (
         <div>
+            
         <nav className="navBar">
+            
             <ul className="navBarButtons">
                 <CustomLink to="/">News</CustomLink>
                 <CustomLink to="/how">How we do it</CustomLink>
                 <CustomLink to="/products">Products</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
                 <div className="themeSwitch">
-                <ReactSwitch className="switchNav" offHandleColor="#aaaaaa" color="#afaa00" onColor="#ddd" onHandleColor="#444" onChange={toggleTheme} checked={ theme === "dark"} />
-                </div>
+                <ReactSwitch className="switchNav" handleDiameter={28} offHandleColor="#dddddd" color="#777777" offColor="#dddddd" onColor="#555555" onHandleColor="#555555" onChange={toggleTheme} checked={ theme === "dark"} />
+            </div>
             </ul>
+            
         </nav>
+        
         
         </div>
     );

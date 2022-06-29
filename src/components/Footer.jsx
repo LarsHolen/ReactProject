@@ -4,16 +4,19 @@ import '../css/App.css';
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer" id="footer">
          <hr className="footerHR"/>
         <div className="footer-container">
             <div className="footer-row">
                 <div className="footer-col">
                     <h4>Reset Design</h4>
                     <ul className="footer_list">
-                        <li>+47 00 00 00 00</li>
                         <li>Reset 20</li>
                         <li>5208 Os</li>
+                        <li>Norway</li>
+                        <br/>
+                        <li>Tlf:</li>
+                        <li>+47 94 10 10 91</li>
                     </ul>
                 </div>
 

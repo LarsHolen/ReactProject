@@ -3,7 +3,7 @@ import YoutubeEmbed from './YoutubeEmbed';
 
 const VideoContainer = (props) => {
   return (
-     <YoutubeEmbed embedId={props.src} />
+     <YoutubeEmbed className="youtubeC" embedId={props.src} />
   )
 }
 

@@ -22,7 +22,7 @@ const ItemContainer = () => {
 
     return (
         <div className="app">
-            <h1 className="itemsHeader" >Products</h1>
+            <h1 className="newsHeader" >Products</h1>
 
             {items?.length > 0
             ?(
