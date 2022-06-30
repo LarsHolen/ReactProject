@@ -14,7 +14,7 @@ const ProductsPage = () => {
                 <a href="mailto:larsholen6@hotmail.com">Please contact us by mail</a>
                 , or 
                 <Link to={"../about"}>
-                    <p>call us!</p>
+                &nbsp;call us!
                 </Link>
             </p>
         </div>

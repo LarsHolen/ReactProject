@@ -11,6 +11,8 @@ import AboutPage from './pages/AboutPage';
 import HowPage from './pages/HowPage';
 import Footer from './components/Footer';
 
+import ScrollToTop from './components/ScrollToTop';
+
 export const ThemeContext = createContext(null);
 
 
@@ -26,12 +28,15 @@ const App = () => {
             <Header />
             <NavBar theme={theme} toggleTheme={toggleTheme}/>
             <div className="pageContainer">
+            <ScrollToTop>
                 <Routes>
+                
                     <Route path="/" element={<NewsPage />} />
                     <Route path="/how" element={<HowPage />} />
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/about" element={<AboutPage />} />
                 </Routes>
+            </ScrollToTop>
             </div>
             <Footer />
         </div>

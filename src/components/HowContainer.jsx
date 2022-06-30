@@ -18,7 +18,7 @@ const HowContainer = () => {
     const [itemsInTotal, setItemsInTotal] = useState(0);
     const [itemsShowing, setItemsShowing] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
-    var itemLimit = 3;
+    var itemLimit = 2;
     const [pageString, setPageString] = useState("Showing " + itemsShowing  + " of " +itemsInTotal);
     const PageForward = () => {return <button className="myButton" id="forward" onClick={clickForward}>Flip forward</button>};
     const PageBackward = () => {return <button className="myButton" id="forward" onClick={clickBackward}>Flip backward</button>};
@@ -27,7 +27,7 @@ const HowContainer = () => {
 
     // Fetch function:
     async function getHow(url = '', data = {}) {
-        const response = await fetch(url, {
+        await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -38,18 +38,23 @@ const HowContainer = () => {
         redirect: 'follow', // manual, *follow, error
         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify(data) // body data type must match "Content-Type" header
+        })
+        .then((res => res.json()))
+        .then(data => {
+            setHow(data.items);
+            setItemsShowing(data.items.length);
+            setItemsInTotal(data.total);
         });
-            return response.json(); // parses JSON response into native JavaScript objects
     }
 
     useEffect(() =>{
         getHow(API_URL, { 'offset': itemOffset, 'limit': itemLimit}).then(data => {
-            setHow(data.items);
-            setItemsShowing(data.items.length);
-            setItemsInTotal(data.total);
-            
+            updatePagestring();
+            if(goingForward){
+                window.scrollTo(0, 0); 
+            } 
         });
-    }, []);
+    }, [itemOffset, pageString, goingForward, itemLimit]);
 
 
     function updatePagestring()
@@ -86,14 +91,14 @@ const HowContainer = () => {
                 </div>
             )}
 
-<div>
+            <div >
                 {itemOffset !== 0 ? <PageBackward /> : null}
                 {itemsInTotal >= (itemsShowing + itemOffset +1) ? <PageForward /> : null}
             </div>
-            <p>"Showing {itemOffset + 1} to {itemOffset + itemLimit} of {itemsInTotal} total. "</p>
+            <p>"Showing number {itemOffset + 1} to {itemOffset + how.length} of {itemsInTotal} total. "</p>
         </div>
     );
 }
 
-// Export for å kunne importere andre steder aka index.js
+
 export default HowContainer;

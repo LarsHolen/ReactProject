@@ -24,7 +24,7 @@ const NewsContainer = () => {
 
     // Fetch function:
     async function getNews(url = '', data = {}) {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -49,9 +49,9 @@ const NewsContainer = () => {
         updatePagestring();
         if(goingForward){
             window.scrollTo(0, 0);
-            console.log(goingForward);
         } 
-    }, [itemOffset, pageString]);
+        console.log("running");
+    }, [itemOffset, pageString, goingForward, itemLimit]);
 
     function updatePagestring()
     {
@@ -90,7 +90,7 @@ const NewsContainer = () => {
                 {itemOffset !== 0 ? <PageBackward /> : null}
                 {itemsInTotal >= (itemsShowing + itemOffset +1) ? <PageForward /> : null}
             </div>
-            <p>"Showing {itemOffset + 1} to {itemOffset + itemLimit} of {itemsInTotal} total. "</p>
+            <p>"Showing number {itemOffset + 1} to {itemOffset + news.length} of {itemsInTotal} total. "</p>
         </div>
     );
 }
