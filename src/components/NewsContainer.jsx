@@ -4,12 +4,9 @@ import '../css/App.css';
 import News from './News';
 
 
-
-
-
 const NewsContainer = () => {
 
-    
+    // State for fetching info from php/sql
     const [news, setNews] = useState([]);
     const API_URL = 'https://larsholen.com/public/loadNews.php';
 
@@ -18,73 +15,64 @@ const NewsContainer = () => {
     const [itemsInTotal, setItemsInTotal] = useState(0);
     const [itemsShowing, setItemsShowing] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
-   
-    var itemLimit = 3;
-    //var pageString = "Showing " + itemsShowing  + " of " +itemsInTotal;
+    var itemLimit = 4;
     const [pageString, setPageString] = useState("Showing " + itemsShowing  + " of " +itemsInTotal);
-    const PageForward = () => {return <button className="myButton" id="forward" onClick={ClickForward}>Flip forward</button>};
-    const PageBackward = () => {return <button className="myButton" id="forward" onClick={clickMe}>Flip backward</button>};
+    const PageForward = () => {return <button className="myButton" id="forward" onClick={clickForward}>Flip forward</button>};
+    const PageBackward = () => {return <button className="myButton" id="forward" onClick={clickBackward}>Flip backward</button>};
+    // Saving which button was pressed, so forward scroll to top of page while back does not scroll up.
+    const [goingForward, setGoingForward] = useState(true);
 
-
-// Example POST method implementation:
-async function getNews(url = '', data = {}) {
-    // Default options are marked with *
-    const myHeaders = new Headers();
-    
-    myHeaders.append('Content-Type', 'application/json');
-
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers:{
-        "Content-Type": "application/json"
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    })
-    .then((res => res.json()))
-    .then(data => {
-        setNews(data.items);
-        setItemsShowing(data.items.length);
-        setItemsInTotal(data.total);
-    });
-    //return response.json(); // parses JSON response into native JavaScript objects
-  }
+    // Fetch function:
+    async function getNews(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers:{
+                "Content-Type": "application/json"
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        })
+        .then((res => res.json()))
+        .then(data => {
+            setNews(data.items);
+            setItemsShowing(data.items.length);
+            setItemsInTotal(data.total);
+        });
+    }
 
     useEffect(() =>{
         getNews(API_URL, { 'offset': itemOffset, 'limit': itemLimit});
-        console.log("itemOffset" +itemOffset);
-    }, [itemOffset]);
+        updatePagestring();
+        if(goingForward){
+            window.scrollTo(0, 0);
+            console.log(goingForward);
+        } 
+    }, [itemOffset, pageString]);
 
-    async function ClickForward()
+    function updatePagestring()
     {
-        setItemOffset(prev => prev + itemLimit);
-
-
+        setPageString("Showing " + itemsShowing  + " of " +itemsInTotal);
     }
-    function clickMe()
+    function clickForward()
     {
-
+        setGoingForward(true);
+        setItemOffset(prev => prev + itemLimit);
+    }
+    function clickBackward()
+    {
+        setGoingForward(false);
         setItemOffset(prev => prev - itemLimit);
-        if(itemOffset < 0) setItemOffset(prev => 0);
+       
     }
     
 
     return (
         <div className="app">
-            <div>
-                <p>{itemsInTotal}</p>
-                <p>{itemOffset}</p>
-                {itemOffset !== 0 ? <PageBackward /> : null}
-                {itemsInTotal >= (itemsShowing + itemOffset +1) ? <PageForward /> : null}
-                
-            </div>
-           
             <h1 className="newsHeader" >News</h1>
-
             {news?.length > 0
             ?(
                 <div className="newsContainer">
@@ -98,7 +86,11 @@ async function getNews(url = '', data = {}) {
                     <h2>No news found</h2>
                 </div>
             )}
-            <p>{pageString}</p>
+            <div>
+                {itemOffset !== 0 ? <PageBackward /> : null}
+                {itemsInTotal >= (itemsShowing + itemOffset +1) ? <PageForward /> : null}
+            </div>
+            <p>"Showing {itemOffset + 1} to {itemOffset + itemLimit} of {itemsInTotal} total. "</p>
         </div>
     );
 }
