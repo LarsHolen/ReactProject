@@ -4,11 +4,19 @@ import '../css/App.css';
 import Item from './Item';
 
 
-const API_URL = 'https://larsholen.com/public/getItems.php';
+
 
 const ItemContainer = () => {
 
     const [items, setItems] = useState([]);
+    const API_URL = 'https://larsholen.com/public/getItems.php';
+
+
+
+
+
+    
+ 
     const getItems = async () =>{
         const response = await fetch(`${API_URL}`);
         const data = await response.json();
