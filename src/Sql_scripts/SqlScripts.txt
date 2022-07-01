@@ -1,4 +1,6 @@
-Making the news table:
+SQL tables was made in dbadmin.
+An export will give this cose to replicate one of the tables:
+The other SQL are within the php files.
 
 CREATE TABLE `jtf_news` (
   `Id` int(11) NOT NULL,
@@ -10,12 +12,3 @@ CREATE TABLE `jtf_news` (
 )
 
 
-Making the how table(same as news):
-CREATE TABLE `jtf_how` (
-  `Id` int(11) NOT NULL,
-  `Title` varchar(250) DEFAULT NULL,
-  `Comment` varchar(2500) DEFAULT NULL,
-  `ImageURL` varchar(250) DEFAULT NULL,
-  `VideoURL` varchar(250) DEFAULT NULL,
-  `PublishDate` date NOT NULL DEFAULT current_timestamp()
-)

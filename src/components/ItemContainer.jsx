@@ -41,7 +41,6 @@ const ItemContainer = () => {
         })
         .then((res => res.json()))
         .then(data => {
-            console.log("here");
             setItems(data.items);
             setItemsShowing(data.items.length);
             setItemsInTotal(data.total);
@@ -54,7 +53,10 @@ const ItemContainer = () => {
         if(goingForward){
             window.scrollTo(0, 0);
         } 
-        console.log("running");
+        items.forEach(element => {
+            console.log(element.Availability);    
+        });
+  
     }, [itemOffset, pageString, goingForward, itemLimit]);
 
     function updatePagestring()
@@ -87,7 +89,7 @@ const ItemContainer = () => {
                 </div>
             ) : (
                 <div className="empty">
-                    <h2>Database problems, please try again.</h2>
+                    <h2>Loading, please wait..</h2>
                 </div>
             )}
             <div>

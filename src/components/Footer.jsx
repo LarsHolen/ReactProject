@@ -5,6 +5,7 @@ import '../css/App.css';
 const Footer = () => {
   return (
     <div className="footer" id="footer">
+        <br></br>
          <hr className="footerHR"/>
         <div className="footer-container">
             <div className="footer-row">
@@ -30,11 +31,10 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-col">
-                    <h4>Last col:</h4>
+                    <h4>Catalog:</h4>
                     <ul className="footer_list">
-                        <li>Yes. another one</li>
-                        <li>Bla bla</li>
-                        <li>mhmmmm</li>
+                        <li><a  href="https://larsholen.com/Objects/Products.pdf" download >Download Catalog</a> </li>
+                        <li><a  href="https://larsholen.com/Objects/Products.pdf">View Catalog</a></li>
                     </ul>
                 </div>
                 

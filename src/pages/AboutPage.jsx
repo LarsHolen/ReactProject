@@ -21,7 +21,8 @@ export const AboutPage = () => {
               creative mind.
             </p>
             <img className="newsImage" src={require('../images/us.jpg')} alt="The barn"/>
-            <p>The two of us.
+            <p>
+              The two of us.
             </p>
         </div>
   )

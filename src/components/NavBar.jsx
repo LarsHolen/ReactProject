@@ -21,8 +21,20 @@ const NavBar = (props) => {
                 <CustomLink to="/products">Products</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
                 <div className="themeSwitch">
-                <ReactSwitch className="switchNav" handleDiameter={28} offHandleColor="#dddddd" color="#777777" offColor="#dddddd" onColor="#555555" onHandleColor="#555555" onChange={toggleTheme} checked={ theme === "dark"} />
-            </div>
+                <ReactSwitch className="switchNav"
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            handleDiameter={20} 
+                            height={15}
+                            width={48} 
+                            offHandleColor="#eee" 
+                            color="#777" 
+                            offColor="#aaa"
+                            onColor="#aaa" 
+                            onHandleColor="#555" 
+                            onChange={toggleTheme} 
+                            checked={ theme === "dark"} />
+                </div>
             </ul>
             
         </nav>
@@ -36,8 +48,8 @@ function CustomLink({ to, children, ...props }){
     const resolvedPath = useResolvedPath(to);
     const isActive = useMatch({ path: resolvedPath.pathname, end: true})
     return (
-        <li className={isActive ? "active" : ""}>
-            <Link to={to} {...props}>{children}</Link>
+        <li className={isActive ? "active" : ""} >
+            <Link to={to} {...props} id="CLink">{children}</Link>
         </li>
         )
 }

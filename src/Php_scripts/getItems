@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Function to query information 
  *
@@ -11,13 +12,14 @@ header('Access-Control-Allow-Methods: POST, PUT, GET');
 
 require "../config.php";
 require "../common.php";
-
-  try  {
+try  
+{
 	
-     $connection = new PDO($dsn, $username, $password, $options);
-
-    // Finds how many entries
-    $stmt = $connection->prepare("SELECT COUNT(*) FROM jtf_news");
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    //        $sql = "SELECT * FROM Items";
+ // Finds how many entries
+    $stmt = $connection->prepare("SELECT COUNT(*) FROM Items");
     $stmt->execute();
     $count = $stmt->fetchColumn();
 
@@ -35,7 +37,7 @@ require "../common.php";
     
     
  
-    $sql = "SELECT * FROM jtf_news ORDER BY PublishDate DESC LIMIT :offset, :limit";
+    $sql = "SELECT * FROM Items ORDER BY PublishDate DESC LIMIT :offset, :limit";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':offset', $offset, PDO::PARAM_INT); 
     $statement->bindParam(':limit', $limit, PDO::PARAM_INT); 
@@ -54,4 +56,3 @@ require "../common.php";
 	  echo "Erroren";
   }
 ?>
-

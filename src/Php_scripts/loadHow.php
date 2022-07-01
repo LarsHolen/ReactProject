@@ -17,7 +17,7 @@ require "../common.php";
      $connection = new PDO($dsn, $username, $password, $options);
 
     // Finds how many entries
-    $stmt = $connection->prepare("SELECT COUNT(*) FROM jtf_news");
+    $stmt = $connection->prepare("SELECT COUNT(*) FROM jtf_how");
     $stmt->execute();
     $count = $stmt->fetchColumn();
 
@@ -25,7 +25,7 @@ require "../common.php";
     $offset = $data["offset"];
     $limit = $data["limit"];
     
-    // Test if we are trying to get more how's than we have, if so set offset to..
+    // Test if we are trying to get more news than we have, if so set offset to..
     if($count < $offset)
     {
         $offset = $count - $limit;
@@ -41,11 +41,11 @@ require "../common.php";
     $statement->bindParam(':limit', $limit, PDO::PARAM_INT); 
     $statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-	 //$row = array();
-      
-		echo json_encode($result );
-   
+	//echo json_encode($result );
+     $info = array( 
+    "total" => $count , 
+    "items" => $result);
+    echo json_encode($info);       
   } catch(PDOException $error) {
       echo $sql . "<br>" . $error->getMessage();
 	  echo "Erroren";

@@ -87,7 +87,7 @@ const HowContainer = () => {
                 </div>
             ) : (
                 <div className="empty">
-                    <h2>Nothing found</h2>
+                    <h2>Loading, please wait..</h2>
                 </div>
             )}
 
